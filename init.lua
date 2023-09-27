@@ -1,8 +1,16 @@
--- [[ File: ~/.configs/nvim/init.lua ]]
+-------------------------------------------------------------------------------
+-- NEOVIM CONFIG INIT
 -- Entry point for Neovim config
+-- File: ~/.configs/nvim/init.lua
+-- ----------------------------------------------------------------------------
+
+-- Disable Netrw for better Neotree intergration
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- [[ Imports ]]
--- Neovim will look in the ./lua folder so we don't need to scope it with the lua folder prefix
+-- Neovim will look in the ./lua folder so we don't need to scope it with the 
+-- lua folder prefix
 require('keymaps')
 require('options')
 require('lazyload')

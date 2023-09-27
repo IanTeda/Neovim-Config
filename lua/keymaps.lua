@@ -37,7 +37,7 @@ keymap("n", "<C-k>", "<C-w>k", opts)					-- <ctrl+k> = navigate split screen up
 keymap("n", "<C-l>", "<C-w>l", opts)					-- <ctrl+l> = navigate split screen right
 
 -- Enter file explore with leader key [Disable once nvim-tree installed]
-keymap("n", "<leader>e", ":Lex 30<cr>", opts) 				-- <leader+e> = open nwtree file explorer
+--keymap("n", "<leader>e", ":Lex 30<cr>", opts) 				-- <leader+e> = open nwtree file explorer
 
 -- Open Nvim Tree with leader(space)+e
 -- keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)		-- <leader+e> = open nvim-tree file explorer

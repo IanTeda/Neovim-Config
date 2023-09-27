@@ -1,5 +1,5 @@
 -- [[ File: ~/.config/nvim/lua/lazy.lua ]]
--- https://github.com/folke/lazy.nvim#-installation
+-- https://github.com/folke/lazy.nvim
 -- Lazy.nvim plugin manager
 --  nvim --headless "+Lazy! sync" +qa
 -- ':help lazy.nvim.txt` for more info
@@ -73,21 +73,34 @@ require('lazy').setup({
         -- Show pills on top of the Lazy window
         pills = true, ---@type boolean
         icons = {
-            cmd = " ",
-            config = "",
-            event = "",
-            ft = " ",
-            init = " ",
-            import = " ",
-            keys = " ",
-            lazy = "󰒲 ",
+            -- Nerd Fonts
+            cmd = "⌘",
+            config = "🛠",
+            event = "📅",
+            ft = "📂",
+            init = "⚙",
+            keys = "🗝",
+            plugin = "🔌",
+            runtime = "💻",
+            source = "📄",
+            start = "🚀",
+            task = "📌",
+            lazy = "💤 ",
+            --cmd = " ",
+            --config = "",
+            --event = "",
+            --ft = " ",
+            --init = " ",
+            --import = " ",
+            --keys = " ",
+            --lazy = "󰒲 ",
             loaded = "●",
             not_loaded = "○",
-            plugin = " ",
-            runtime = " ",
-            source = " ",
-            start = "",
-            task = "✔ ",
+            --plugin = " ",
+            --runtime = " ",
+            --source = " ",
+            --start = "",
+            --task = "✔ ",
             list = {
                 "●",
                 "➜",
