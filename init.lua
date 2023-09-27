@@ -2,12 +2,10 @@
 -- Entry point for Neovim config
 
 -- [[ Imports ]]
--- Neovim will look in the ./lua folder so we don't need to prefers it
+-- Neovim will look in the ./lua folder so we don't need to scope it with the lua folder prefix
 require('keymaps')
 require('options')
-
-
-
+require('lazyload')
 
 
 -- The line beneath this is called `modeline`. See `:help modeline`

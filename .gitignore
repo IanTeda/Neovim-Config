@@ -39,3 +39,9 @@ luac.out
 *.x86_64
 *.hex
 
+# Neovim working files
+tags
+test.sh
+.luarc.json
+nvim
+lazy-lock.json
