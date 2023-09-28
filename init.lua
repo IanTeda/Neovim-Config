@@ -11,6 +11,7 @@ vim.g.loaded_netrwPlugin = 1
 -- [[ Imports ]]
 -- Neovim will look in the ./lua folder so we don't need to scope it with the 
 -- lua folder prefix
+require("variables")
 require('keymaps')
 require('options')
 require('lazyload')
