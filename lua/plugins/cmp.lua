@@ -1,10 +1,18 @@
+-- ----------------------------------------------------------------------------
+-- NVIM-CMP
+-- A completion engine plugin for neovim
+--
+-- File: ~/.config/nvim/lua/plugins/cmp.lua
+-- Repo: https://github.com/hrsh7th/nvim-cmp
+-- ----------------------------------------------------------------------------
+
 return {
     'hrsh7th/nvim-cmp',
     dependencies = {
         -- Snippet Engine & its associated nvim-cmp source
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
-        
+
         -- Adds LSP completion capabilities
         'hrsh7th/cmp-nvim-lsp',
 
@@ -24,7 +32,6 @@ return {
         "hrsh7th/cmp-nvim-lua"
     },
     config = function ()
-
         --   פּ ﯟ   some other good icons
         local kind_icons = {
               Text = "󰊄",
@@ -64,7 +71,7 @@ return {
         luasnip.config.setup {}
 
         -- [[ Configure CMP ]]
-        cmp.setup {
+        cmp.setup({
             -- REQUIRED - you must specify a snippet engine
             snippet = {
                 expand = function(args)
@@ -117,8 +124,7 @@ return {
             },
             formatting = {
                 fields = { "kind", "abbr", "menu" },
-                format = function(entry, vim_item)
-      
+                format = function(entry, vim_item)  
                     -- Kind icons
                     vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
                     -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
@@ -139,6 +145,6 @@ return {
                 ghost_text = false,
                 native_menu = false,
             },
-        }
+        })
     end
 }
