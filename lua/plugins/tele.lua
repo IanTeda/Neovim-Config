@@ -1,6 +1,7 @@
 -- ----------------------------------------------------------------------------
 -- TELESCOPE
 -- A highly extendable fuzzy finder
+-- Filename cannot be treesitter, so shortened to tree
 -- 
 -- File: ~/.config/nvim/lua/plugins/telescope.lua
 -- Repo: https://github.com/nvim-telescope/telescope.nvim
@@ -56,7 +57,7 @@ return {
                         ["<PageUp>"] = actions.results_scrolling_up,
                         ["<PageDown>"] = actions.results_scrolling_down,
 
-                        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                        --["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
                         ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
                         ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
                         ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -121,5 +122,8 @@ return {
                 }
             }
         }
+
+        -- Setup telescope
+        require('telescope').setup(TELESCOPE_SETTINGS)
     end
 }
