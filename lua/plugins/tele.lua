@@ -6,6 +6,7 @@
 -- File: ~/.config/nvim/lua/plugins/telescope.lua
 -- Repo: https://github.com/nvim-telescope/telescope.nvim
 -- ----------------------------------------------------------------------------
+-- TODO: Add lazy load when toggled
 
 return {
     'nvim-telescope/telescope.nvim',

@@ -1,3 +1,11 @@
+-------------------------------------------------------------------------------
+-- TOGGLE COMMENTS
+-- Smart and Powerful commenting plugin
+--
+-- File: ~/.config/nvim/lua/plugins/comments.lua
+-- Repo: https://github.com/numToStr/Comment.nvim/tree/master
+-- -----------------------------------------------------------------------------
+
 return {
     -- PLUGIN TO LAZY LOAD
     -- Lazy.vim will look for lua files in the ~/.config/nvim/lua/plugins folder
@@ -15,7 +23,7 @@ return {
     -- on the plugin’s name. See also opts. To use the default implementation 
     -- without opts set config to true.
     config = function ()
-        ---@class PLUGIN_SETTINGS
+        --- Comment Settings
         local COMMENT_SETTINGS = {
             --Add a space b/w comment and the line
             padding = true,
@@ -32,7 +40,7 @@ return {
             },
             ---LHS of operator-pending mappings in NORMAL and VISUAL mode
             opleader = {
-                ---Line-comment keymap
+                ---Line-comment keymapG
                 line = 'gc',
                 ---Block-comment keymap
                 block = 'gb',

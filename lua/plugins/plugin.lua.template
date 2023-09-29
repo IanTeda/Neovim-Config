@@ -1,3 +1,11 @@
+-------------------------------------------------------------------------------
+-- NAME OF PLUGIN
+-- Description of plugin 
+--
+-- File: /location/of/file 
+-- Repo: http://github.com/username/repo 
+-------------------------------------------------------------------------------
+
 return {
     -- PLUGIN TO LAZY LOAD
     -- Lazy.vim will look for lua files in the ~/.config/nvim/lua/plugins folder

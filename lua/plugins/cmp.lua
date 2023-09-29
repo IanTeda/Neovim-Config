@@ -94,6 +94,7 @@ return {
                     behavior = cmp.ConfirmBehavior.Replace,
                     select = true,
                 },
+
                 -- Super tabs, to navigate through snippets
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
@@ -117,7 +118,7 @@ return {
             sources = {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
-                { name = "buffer" },
+               -- { name = "buffer" },
                 { name = "path" },
                 { name = "crates"},
                 { name = "nvim_lua" },
