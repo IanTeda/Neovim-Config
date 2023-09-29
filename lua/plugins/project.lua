@@ -105,6 +105,6 @@ return {
             datapath = vim.fn.stdpath("data"),
         }
         require('project_nvim').setup(PLUGIN_SETTINGS)
-        require("telescope").load_extension('projects')
+        --require("telescope").load_extension('projects')
     end,
 }
