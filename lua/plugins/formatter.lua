@@ -1,15 +1,15 @@
 -------------------------------------------------------------------------------
--- gitsigns.nvim
---  Super fast git decorations implemented purely in Lua.
+-- FORMATTER
+-- A format runner for Neovim
 --
--- File: ~/.config/nvim/lua/plugins/gitsigns.lua
--- Repo: https://github.com/lewis6991/gitsigns.nvim
+-- File: ~/.config/nvim/lua/plugins/formatter.lua
+-- Repo: https://github.com/mhartington/formatter.nvim
 -------------------------------------------------------------------------------
 
 return {
 	-- PLUGIN TO LAZY LOAD
 	-- Lazy.vim will look for lua files in the ~/.config/nvim/lua/plugins folder
-	"lewis6991/gitsigns.nvim",
+	"mhartington/formatter.nvim",
 
 	-- VERSIONING
 	-- If you want to install a specific revision of a plugin, you can use
@@ -19,27 +19,37 @@ return {
 	-- KEY MAPPING
 	-- Key mappings will load the plugin the first time they get executed.
 	-- keys = {"<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree"} ,
+	--keys = {},
 
 	-- DEPENDENCIES
 	-- A list of plugin names or plugin specs that should be loaded when the
 	-- plugin loads. Dependencies are always lazy-loaded unless specified
 	-- otherwise. When specifying a name, make sure the plugin spec has been
 	-- defined somewhere else.
-	-- dependencies = { 'github_username/repo_name'},
+	dependencies = {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+	},
+
+	-- LAZY
+	-- When true, the plugin will only be loaded when needed. Lazy-loaded
+	-- plugins are automatically loaded when their Lua modules are required,
+	-- or when one of the lazy-loading handlers triggers
+	--lazy = true,
 
 	-- COMMAND
 	-- Lazy load on command
-	-- cmd = {},
+	--cmd = {},
 
 	-- FILETYPE
 	-- Lazy load on filetype
-	-- ft = {},
+	--ft = {},
 
 	-- PRIORITY
 	-- Only useful for start plugins (lazy=false) to force loading certain
 	-- plugins first. Default priority is 50. It’s recommended to set this to
 	-- a high number for colorschemes.
-	-- priority = number?,
+	--priority = number?,
 
 	-- OPTIONAL
 	-- When a spec is tagged optional, it will only be included in the
@@ -47,14 +57,14 @@ return {
 	-- somewhere else without optional. This is mainly useful for Neovim
 	-- distros, to allow setting options on plugins that may/may not be part
 	-- of the user’s plugins
-	-- optional = boolean?,
+	--optional = boolean?,
 
 	-- SETTINGS
 	-- opts should be a table (will be merged with parent specs), return a
 	-- table (replaces parent specs) or should change a table. The table will
 	-- be passed to the Plugin.config() function. Setting this value will imply
 	-- Plugin.config()
-	-- opts = {}
+	--opts = {}
 
 	-- CONFIG
 	-- Config is executed when the plugin loads. The default implementation
@@ -63,70 +73,48 @@ return {
 	-- on the plugin’s name. See also opts. To use the default implementation
 	-- without opts set config to true.
 	config = function()
-		---@class PLUGIN_SETTINGS
+		local util = require("formatter.util")
+
+		-- Put plugin settings into a local variable for easier reading
 		local PLUGIN_SETTINGS = {
-			signs = {
-				add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-				change = {
-					hl = "GitSignsChange",
-					text = "▎",
-					numhl = "GitSignsChangeNr",
-					linehl = "GitSignsChangeLn",
+			-- Enable or disable logging
+			logging = true,
+			-- Set the log level
+			log_level = vim.log.levels.WARN,
+			-- All formatter configurations are opt-in
+			filetype = {
+				-- Formatter configurations for filetype "lua" go here
+				-- and will be executed in order
+				lua = {
+					function()
+						return {
+							exe = vim.fn.stdpath("data") .. "/mason/packages/stylua/stylua",
+							args = {
+								"--search-parent-directories",
+								"--stdin-filepath",
+								util.escape_path(util.get_current_buffer_file_path()),
+								"--",
+								"-",
+							},
+							stdin = true,
+						}
+					end,
 				},
-				delete = {
-					hl = "GitSignsDelete",
-					text = "契",
-					numhl = "GitSignsDeleteNr",
-					linehl = "GitSignsDeleteLn",
+
+				-- Use the special "*" filetype for defining formatter configurations on
+				-- any filetype
+				["*"] = {
+					-- "formatter.filetypes.any" defines default configurations for any
+					-- filetype
+					require("formatter.filetypes.any").remove_trailing_whitespace,
 				},
-				topdelete = {
-					hl = "GitSignsDelete",
-					text = "契",
-					numhl = "GitSignsDeleteNr",
-					linehl = "GitSignsDeleteLn",
-				},
-				changedelete = {
-					hl = "GitSignsChange",
-					text = "▎",
-					numhl = "GitSignsChangeNr",
-					linehl = "GitSignsChangeLn",
-				},
-			},
-			signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-			numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-			linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-			word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-			watch_gitdir = {
-				interval = 1000,
-				follow_files = true,
-			},
-			attach_to_untracked = true,
-			current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-			current_line_blame_opts = {
-				virt_text = true,
-				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-				delay = 1000,
-				ignore_whitespace = false,
-			},
-			current_line_blame_formatter_opts = {
-				relative_time = false,
-			},
-			sign_priority = 6,
-			update_debounce = 100,
-			status_formatter = nil, -- Use default
-			max_file_length = 40000,
-			preview_config = {
-				-- Options passed to nvim_open_win
-				border = "single",
-				style = "minimal",
-				relative = "cursor",
-				row = 0,
-				col = 1,
-			},
-			yadm = {
-				enable = false,
 			},
 		}
-		require("gitsigns").setup(PLUGIN_SETTINGS)
+
+		require("formatter").setup(PLUGIN_SETTINGS)
+
+
+        vim.keymap.set('n', '<leader>f', '<cmd>Format<cr>', { desc = 'Format document' })
+        vim.keymap.set('n', '<leader>F', '<cmd>FormatWrite<cr>', { desc = 'Format document' })
 	end,
 }

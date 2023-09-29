@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- NEOVIM VARIABLES 
+-- NEOVIM VARIABLES
 -- Vim variables
 -- Files: ~/.config/nvim/lua/variables.lua
 --
@@ -18,7 +18,7 @@ g.t_co = 256
 g.background = "dark"
 
 -- Neovime provder Variables
-g.node_host_prog = '/usr/local/bin/neovim-node-host'
-g.python3_host_prog = '/usr/bin/python3'
-g.ruby_host_prog = '/usr/local/bin/neovim-ruby-host'
-g.perl_host_prog = '/usr/bin/perl'
+g.node_host_prog = "/usr/local/bin/neovim-node-host"
+g.python3_host_prog = "/usr/bin/python3"
+g.ruby_host_prog = "/usr/local/bin/neovim-ruby-host"
+g.perl_host_prog = "/usr/bin/perl"
