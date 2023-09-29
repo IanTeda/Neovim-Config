@@ -46,12 +46,12 @@ return {
 
         -- TODO: Add cmp intergration
         -- Hook autopairs into code completion CMP
-        -- local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-        -- local cmp_status_ok, cmp = pcall(require, "cmp")
-        -- if not cmp_status_ok then
-        --     print("Error Loading CMP Plugin")
-        --   return
-        -- end
-        -- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+        local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+        local cmp_status_ok, cmp = pcall(require, "cmp")
+        if not cmp_status_ok then
+            print("Error Loading CMP Plugin")
+            return
+        end
+        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
     end
 }
