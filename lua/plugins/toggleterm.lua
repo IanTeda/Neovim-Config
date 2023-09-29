@@ -1,19 +1,28 @@
+-------------------------------------------------------------------------------
+-- TOGGLE TERM
+-- Persist and toggle multiple terminals during an editing session
+-- 
+-- File ~/.config/nvim/lua/plugins/toggleterm.lua
+-- Repo: https://github.com/akinsho/toggleterm.nvim/tree/main
+-------------------------------------------------------------------------------
+
 return {
     -- PLUGIN TO LAZY LOAD
     -- Lazy.vim will look for lua files in the ~/.config/nvim/lua/plugins folder
-    'akinsho/toggleterm.nvim',
+   'akinsho/toggleterm.nvim', 
     
     -- VERSIONING
     -- If you want to install a specific revision of a plugin, you can use 
     -- `commit`,`tag`, `branch`, `version`.
     version = "*",
-   
-    -- OPTIONALS
-    -- opts should be a table (will be merged with parent specs), return a 
-    -- table (replaces parent specs) or should change a table. The table will 
-    -- be passed to the Plugin.config() function. Setting this value will imply
-    -- Plugin.config()
-    -- opts = { }
+
+    -- KEY MAPPING
+    -- Key mappings will load the plugin the first time they get executed.
+    -- keys = {"<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree"} ,
+    -- TODO: What is the escpae key for '\' looking to only load when toggled
+    --keys = {
+     --   {"[[<c-\>]]", "<cmd>ToggleTerm<cr>", desc="Toggle terminal"}
+    --},
 
     -- CONFIG 
     -- Config is executed when the plugin loads. The default implementation 
@@ -22,10 +31,8 @@ return {
     -- on the plugin’s name. See also opts. To use the default implementation 
     -- without opts set config to true.
     config = function ()
-        
-        ---@class TOGGLETERM_SETTINGS
-        local TOGGLETERM_SETTINGS {
-        	size = 20,
+        local PLUGIN_SETTINGS = {
+            size = 20,
             open_mapping = [[<c-\>]],
             hide_numbers = true,
             shade_filetypes = {},
@@ -47,11 +54,9 @@ return {
             },
         }
 
-        require("toggleterm").setup(TOGGLETERM_SETTINGS)
+        require('toggleterm').setup(PLUGIN_SETTINGS)
 
-        -- Terminal Window Mapping
-        -- Add mappings to make moving in and out of a terminal easier once 
-        -- toggled, whilst still keeping it open
+        -- Keymapping to navigate between terminals
         function _G.set_terminal_keymaps()
             local opts = {noremap = true}
             vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
@@ -64,9 +69,9 @@ return {
 
         vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
-        -- Add Terminal Shortcuts to specific programs
+        -- Terminal Program Shortcuts
         local Terminal = require("toggleterm.terminal").Terminal
-        
+
         -- Lazy Git
         local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
         function _LAZYGIT_TOGGLE()
@@ -91,7 +96,7 @@ return {
             htop:toggle()
         end
 
-        -- Python
+        -- Pyton
         local python = Terminal:new({ cmd = "python", hidden = true })
         function _PYTHON_TOGGLE()
             python:toggle()

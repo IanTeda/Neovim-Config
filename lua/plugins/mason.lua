@@ -10,7 +10,7 @@
 
 return {
     "williamboman/mason.nvim",
-    requires = {
+    dependencies = {
         -- A bridge between mason and lspconfig
         "williamboman/mason-lspconfig.nvim",
     },
