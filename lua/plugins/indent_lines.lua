@@ -16,41 +16,11 @@ return {
     -- If you want to install a specific revision of a plugin, you can use 
     -- `commit`,`tag`, `branch`, `version`.
     version = "*",
-    
+
+    -- Main Module
+    --You can specify the main module to use for config() and opts(), in case 
+    -- it can not be determined automatically. See config() 
     main = "ibl",
-
-    -- KEY MAPPING
-    -- Key mappings will load the plugin the first time they get executed.
-    -- keys = {"<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree"} ,
-
-    -- DEPENDENCIES
-    -- A list of plugin names or plugin specs that should be loaded when the 
-    -- plugin loads. Dependencies are always lazy-loaded unless specified 
-    -- otherwise. When specifying a name, make sure the plugin spec has been
-    -- defined somewhere else.
-    -- dependencies = { 'github_username/repo_name'},
-
-    -- COMMAND
-    -- Lazy load on command 
-    -- cmd = {},
-
-    -- FILETYPE
-    -- Lazy load on filetype
-    -- ft = {},
-
-    -- PRIORITY
-    -- Only useful for start plugins (lazy=false) to force loading certain 
-    -- plugins first. Default priority is 50. It’s recommended to set this to 
-    -- a high number for colorschemes.
-    -- priority = number?,
-
-    -- OPTIONAL
-    -- When a spec is tagged optional, it will only be included in the 
-    -- final spec, when the same plugin has been specified at least once 
-    -- somewhere else without optional. This is mainly useful for Neovim 
-    -- distros, to allow setting options on plugins that may/may not be part 
-    -- of the user’s plugins
-    -- optional = boolean?,
 
     -- SETTINGS
     -- opts should be a table (will be merged with parent specs), return a 
@@ -71,6 +41,7 @@ return {
     -- config = function ()
     --     ---@class PLUGIN_SETTINGS
     --     local PLUGIN_SETTINGS = {
+    --     p
     --    }
     --    require('plugin').setup(PLUGIN_SETTINGS)
     --end,

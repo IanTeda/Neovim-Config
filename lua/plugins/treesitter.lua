@@ -109,7 +109,11 @@ return {
                         ['<leader>A'] = '@parameter.inner',
                     },
                 },
-            }
+            },
+            context_commentstring = {
+                enable = true,
+                enable_autocmd = false,
+            },
         }
 
         -- Setup treesitter

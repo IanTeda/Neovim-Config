@@ -30,6 +30,12 @@ return {
         'nvim-telescope/telescope.nvim' 
     },
 
+    -- LAZY
+    -- When true, the plugin will only be loaded when needed. Lazy-loaded 
+    -- plugins are automatically loaded when their Lua modules are required, 
+    -- or when one of the lazy-loading handlers triggers
+    lazy = true,
+    
     -- COMMAND
     -- Lazy load on command 
     -- cmd = {},
@@ -105,6 +111,6 @@ return {
             datapath = vim.fn.stdpath("data"),
         }
         require('project_nvim').setup(PLUGIN_SETTINGS)
-        --require("telescope").load_extension('projects')
     end,
 }
+

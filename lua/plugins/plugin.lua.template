@@ -27,6 +27,12 @@ return {
     -- defined somewhere else.
     -- dependencies = { 'github_username/repo_name'},
 
+    -- LAZY
+    -- When true, the plugin will only be loaded when needed. Lazy-loaded 
+    -- plugins are automatically loaded when their Lua modules are required, 
+    -- or when one of the lazy-loading handlers triggers
+    -- lazy = true,
+
     -- COMMAND
     -- Lazy load on command 
     -- cmd = {},
