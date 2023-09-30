@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 -- TROUBLE
 -- A pretty list for showing diagnostics, references, telescope results,
--- quickfix and location lists to help you solve all the trouble your code is
+-- quick fix and location lists to help you solve all the trouble your code is
 -- causing.
 --
 -- File: ~/.config/nvim/lua/plugins/trouble.lua
@@ -32,34 +32,6 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 
-	-- LAZY
-	-- When true, the plugin will only be loaded when needed. Lazy-loaded
-	-- plugins are automatically loaded when their Lua modules are required,
-	-- or when one of the lazy-loading handlers triggers
-	--lazy = true,
-
-	-- COMMAND
-	-- Lazy load on command
-	--cmd = {},
-
-	-- FILETYPE
-	-- Lazy load on filetype
-	--ft = {},
-
-	-- PRIORITY
-	-- Only useful for start plugins (lazy=false) to force loading certain
-	-- plugins first. Default priority is 50. It’s recommended to set this to
-	-- a high number for colorschemes.
-	--priority = number?,
-
-	-- OPTIONAL
-	-- When a spec is tagged optional, it will only be included in the
-	-- final spec, when the same plugin has been specified at least once
-	-- somewhere else without optional. This is mainly useful for Neovim
-	-- distros, to allow setting options on plugins that may/may not be part
-	-- of the user’s plugins
-	--optional = boolean?,
-
 	-- SETTINGS
 	-- opts should be a table (will be merged with parent specs), return a
 	-- table (replaces parent specs) or should change a table. The table will
@@ -69,7 +41,7 @@ return {
 		position = "bottom", -- position of the list can be: bottom, top, left, right
 		height = 10, -- height of the trouble list when position is top or bottom
 		width = 50, -- width of the list when position is left or right
-		icons = true, -- use devicons for filenames
+		icons = true, -- use devicons for file names
 		mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
 		severity = nil, -- nil (ALL) or vim.diagnostic.severity.ERROR | WARN | INFO | HINT
 		fold_open = "", -- icon used for open folds
@@ -91,7 +63,7 @@ return {
 			toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
 			switch_severity = "s", -- switch "diagnostics" severity filter level to HINT / INFO / WARN / ERROR
 			toggle_preview = "P", -- toggle auto_preview
-			hover = "K", -- opens a small popup with the full multiline message
+			hover = "K", -- opens a small pop up with the full multi line message
 			preview = "p", -- preview the diagnostic location
 			open_code_href = "c", -- if present, open a URI with more information about the diagnostic error
 			close_folds = { "zM", "zm" }, -- close all folds
@@ -120,17 +92,4 @@ return {
 		},
 		use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 	},
-
-	-- CONFIG
-	-- Config is executed when the plugin loads. The default implementation
-	-- will automatically run require(MAIN).setup(opts). Lazy uses several
-	-- heuristics to determine the plugin’s MAIN module automatically based
-	-- on the plugin’s name. See also opts. To use the default implementation
-	-- without opts set config to true.
-	--config = function ()
-	--    -- Put plugin settings into a local variable for easier reading
-	--    local PLUGIN_SETTINGS = {
-	--    }
-	--    require('plugin').setup(PLUGIN_SETTINGS)
-	--end,
 }

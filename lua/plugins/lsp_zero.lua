@@ -18,11 +18,6 @@ return {
 	-- `commit`,`tag`, `branch`, `version`.
 	branch = "v3.x",
 
-	-- KEY MAPPING
-	-- Key mappings will load the plugin the first time they get executed.
-	-- keys = {"<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree"} ,
-	--keys = {},
-
 	-- DEPENDENCIES
 	-- A list of plugin names or plugin specs that should be loaded when the
 	-- plugin loads. Dependencies are always lazy-loaded unless specified
@@ -37,41 +32,6 @@ return {
 		"L3MON4D3/LuaSnip",
 	},
 
-	-- LAZY
-	-- When true, the plugin will only be loaded when needed. Lazy-loaded
-	-- plugins are automatically loaded when their Lua modules are required,
-	-- or when one of the lazy-loading handlers triggers
-	--lazy = true,
-
-	-- COMMAND
-	-- Lazy load on command
-	--cmd = {},
-
-	-- FILETYPE
-	-- Lazy load on filetype
-	--ft = {},
-
-	-- PRIORITY
-	-- Only useful for start plugins (lazy=false) to force loading certain
-	-- plugins first. Default priority is 50. It’s recommended to set this to
-	-- a high number for colorschemes.
-	--priority = number?,
-
-	-- OPTIONAL
-	-- When a spec is tagged optional, it will only be included in the
-	-- final spec, when the same plugin has been specified at least once
-	-- somewhere else without optional. This is mainly useful for Neovim
-	-- distros, to allow setting options on plugins that may/may not be part
-	-- of the user’s plugins
-	--optional = boolean?,
-
-	-- SETTINGS
-	-- opts should be a table (will be merged with parent specs), return a
-	-- table (replaces parent specs) or should change a table. The table will
-	-- be passed to the Plugin.config() function. Setting this value will imply
-	-- Plugin.config()
-	--opts = {}
-
 	-- CONFIG
 	-- Config is executed when the plugin loads. The default implementation
 	-- will automatically run require(MAIN).setup(opts). Lazy uses several
@@ -82,9 +42,41 @@ return {
 		local lsp_zero = require("lsp-zero")
 
 		lsp_zero.on_attach(function(client, bufnr)
-			-- see :help lsp-zero-keybindings
+			-- see :help lsp-zero-key bindings
 			-- to learn the available actions
-			lsp_zero.default_keymaps({ buffer = bufnr })
+			-- lsp_zero.default_keymaps({ buffer = bufnr })
+			local opts = { buffer = bufnr, remap = false }
+
+			vim.keymap.set("n", "gd", function()
+				vim.lsp.buf.definition()
+			end, opts)
+			vim.keymap.set("n", "K", function()
+				vim.lsp.buf.hover()
+			end, opts)
+			vim.keymap.set("n", "<leader>vws", function()
+				vim.lsp.buf.workspace_symbol()
+			end, opts)
+			vim.keymap.set("n", "<leader>vd", function()
+				vim.diagnostic.open_float()
+			end, opts)
+			vim.keymap.set("n", "[d", function()
+				vim.diagnostic.goto_next()
+			end, opts)
+			vim.keymap.set("n", "]d", function()
+				vim.diagnostic.goto_prev()
+			end, opts)
+			vim.keymap.set("n", "<leader>vca", function()
+				vim.lsp.buf.code_action()
+			end, opts)
+			vim.keymap.set("n", "<leader>vrr", function()
+				vim.lsp.buf.references()
+			end, opts)
+			vim.keymap.set("n", "<leader>vrn", function()
+				vim.lsp.buf.rename()
+			end, opts)
+			vim.keymap.set("i", "<C-h>", function()
+				vim.lsp.buf.signature_help()
+			end, opts)
 		end)
 
 		-- see :help lsp-zero-guide:integrate-with-mason-nvim
@@ -114,6 +106,25 @@ return {
 						end,
 					})
 				end,
+				["lua_ls"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.lua_ls.setup({
+						settings = {
+							Lua = {
+								diagnostics = {
+									globals = { "vim" }, -- Suppress global vim error
+								},
+							},
+						},
+					})
+				end,
+				-- Ansible
+                ["ansiblels"] = function ()
+                   local lspconfig = require("lspconfig")
+                    lspconfig.ansiblels.setup({
+                        filetypes = { "yaml", "yml", "yaml.ansible"}
+                    })
+                end
 			},
 		})
 	end,

@@ -26,6 +26,8 @@ opt.cursorline = true -- highlight the current line
 opt.numberwidth = 4 -- set number column width to 2 {default 4}
 -- vim.opt.shortmess:append "c"
 opt.wrap = false -- bool: Lines longer than the width of the window will wrap and displaying continues on the next line
+opt.spell = true -- bool: Enable spell checking
+opt.spelllang = "en_au"
 
 -- [[ Filetypes ]]
 opt.encoding = "utf8" -- str:  String encoding to use
