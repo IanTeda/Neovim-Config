@@ -6,7 +6,7 @@ Configuration  files for Neovim
 ### Installation
 
 > **NOTE** 
-> [Backup](#FAQ) your previous configuration (if any exists)
+> [Backup] your previous configuration (if any exists)
 
 Requirements:
 * Make sure to review the readmes of the plugins if you are experiencing errors. In particular:
@@ -21,13 +21,13 @@ Neovim's configurations are located under the following paths, depending on your
 | MacOS | `$XDG_CONFIG_HOME/nvim`, '~/.config/nvim` |
 | Windows | `%userprofile%\AppData\Local\nvim\` |
 
-Clone kickstart.nvim:
+Clone config:
 
 ```sh
 # on Linux and Mac
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+git clone https://github.com/IanTeda/Neovim-Config.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 # on Windows
-git clone https://github.com/nvim-lua/kickstart.nvim.git %userprofile%\AppData\Local\nvim\ 
+git clone https://github.com/IanTeda/Neovim-Config.git %userprofile%\AppData\Local\nvim\ 
 ```
 
 ## Post Installation
