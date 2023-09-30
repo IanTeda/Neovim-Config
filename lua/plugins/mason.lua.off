@@ -28,15 +28,17 @@ return {
 			-- clangd = {},
 			-- gopls = {},
 			-- pyright = {},
-			-- rust_analyzer = {},
+			rust_analyzer = {},
 			-- tsserver = {},
-			-- html = { filetypes = { 'html', 'twig', 'hbs'} },
+			html = { filetypes = { 'html', 'twig', 'hbs'} },
 			lua_ls = {
 				Lua = {
 					workspace = { checkThirdParty = false },
 					telemetry = { enable = false },
 				},
 			},
+            yamlls = {}
+            
 		}
 
 		---@class MasonSettings
@@ -198,5 +200,7 @@ return {
 
 		require("mason").setup(MASON_SETTINGS)
 		require("mason-lspconfig").setup(MASON_LSP_SETTINGS)
+
+
 	end,
 }
