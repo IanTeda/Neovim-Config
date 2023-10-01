@@ -1,20 +1,20 @@
 -------------------------------------------------------------------------------
--- NAME OF PLUGIN
--- Description of plugin 
+-- CRATES.IO
+-- A neovim plugin that helps managing crates.io dependencies.
 --
--- File: /location/of/file 
--- Repo: http://github.com/username/repo 
+-- File: ~/.config/nvim/lua/plugins/cratesio.lua
+-- Repo: https://github.com/Saecki/crates.nvim
 -------------------------------------------------------------------------------
 
 return {
     -- PLUGIN TO LAZY LOAD
     -- Lazy.vim will look for lua files in the ~/.config/nvim/lua/plugins folder
-    --'github_username/repo_name',
+    'saecki/crates.nvim',
 
     -- VERSIONING
     -- If you want to install a specific revision of a plugin, you can use 
     -- `commit`,`tag`, `branch`, `version`.
-    --version = "*",
+    tag = "v0.3.0",
 
     -- KEY MAPPING
     -- Key mappings will load the plugin the first time they get executed.
@@ -26,7 +26,9 @@ return {
     -- plugin loads. Dependencies are always lazy-loaded unless specified 
     -- otherwise. When specifying a name, make sure the plugin spec has been
     -- defined somewhere else.
-    --dependencies = { 'github_username/repo_name'},
+    dependencies = {
+        'nvim-lua/plenary.nvim'
+    },
 
     -- LAZY
     -- When true, the plugin will only be loaded when needed. Lazy-loaded 
@@ -38,14 +40,14 @@ return {
     -- Lazy load on command 
     --cmd = {},
 
-    -- FILE TYPE
-    -- Lazy load on file type
-    --ft = {},
+    -- FILETYPE
+    -- Lazy load on filetype
+    ft = {"toml"},
 
     -- PRIORITY
     -- Only useful for start plugins (lazy=false) to force loading certain 
     -- plugins first. Default priority is 50. It’s recommended to set this to 
-    -- a high number for color schemes.
+    -- a high number for colorschemes.
     --priority = number?,
 
     -- OPTIONAL
@@ -63,11 +65,6 @@ return {
     -- Plugin.config()
     --opts = {}
 
-    -- INIT
-	-- Init functions are always executed during startup
-    --init = function()
-	--end,
- 
     -- CONFIG 
     -- Config is executed when the plugin loads. The default implementation 
     -- will automatically run require(MAIN).setup(opts). Lazy uses several
