@@ -88,7 +88,7 @@ return {
 				lua = {
 					function()
 						return {
-							exe = vim.fn.stdpath("data") .. "/mason/packages/stylua/stylua",
+							exe = vim.fn.stdpath("data") .. "/mason/bin/stylua",
 							args = {
 								"--search-parent-directories",
 								"--stdin-filepath",
@@ -101,6 +101,17 @@ return {
 					end,
 				},
 
+				beancount = {
+					function()
+						return {
+							exe = vim.fn.stdpath("data") .. "/mason/bin/beancount-language-server",
+							args = {
+								util.escape_path(util.get_current_buffer_file_path()),
+							},
+							stdin = true,
+						}
+					end,
+				},
 				-- Use the special "*" filetype for defining formatter configurations on
 				-- any filetype
 				["*"] = {
@@ -115,6 +126,6 @@ return {
 
 
         vim.keymap.set('n', '<leader>f', '<cmd>Format<cr>', { desc = 'Format document' })
-        vim.keymap.set('n', '<leader>F', '<cmd>FormatWrite<cr>', { desc = 'Format document' })
+        vim.keymap.set('n', '<leader>F', '<cmd>FormatWrite<cr>', { desc = 'Format and write document' })
 	end,
 }

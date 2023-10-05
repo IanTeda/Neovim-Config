@@ -30,6 +30,9 @@ return {
 
 		-- Lau code completion
 		"hrsh7th/cmp-nvim-lua",
+
+		-- Beancount account completion
+		"crispgm/cmp-beancount",
 	},
 	config = function()
 		--   פּ ﯟ   some other good icons
@@ -122,6 +125,12 @@ return {
 				{ name = "path" },
 				{ name = "crates" },
 				{ name = "nvim_lua" },
+                {
+                    name = 'beancount',
+                    option = {
+                        account = "~/Worland/Workspaces/plain-text-ledger/beans/accounts.beancount"
+                    }
+                }
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
@@ -130,7 +139,7 @@ return {
 					vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 					-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 					vim_item.menu = ({
-                        lsp = "[LSP]",
+						lsp = "[LSP]",
 						luasnip = "[Snippet]",
 						buffer = "[Buffer]",
 						path = "[Path]",

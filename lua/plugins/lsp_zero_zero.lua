@@ -79,38 +79,30 @@ return {
 			end, opts)
 		end)
 
-		-- see :help lsp-zero-guide:integrate-with-mason-nvim
-		-- to learn how to use mason.nvim with lsp-zero
+		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+		-- Require Mason LSP package manager
 		require("mason").setup({})
+
+		-- Set up set up Language servers
 		require("mason-lspconfig").setup({
-			ensure_installed = {
-				"ansiblels", -- Ansible
-				"arduino_language_server", -- Ardunino
-				"beancount", -- Beancount
-				"cssls", -- CSS
-				"docker_compose_language_service", -- Docker Compose
-				"jsonls", -- JSON
-				"lua_ls", -- LUA
-				"marksman", -- Markdown
-				"tsserver", -- Javascript
-				"rust_analyzer", -- Rust
-				"yamlls", -- YAML
-			},
+			-- Get Mason to install as minimum these language servers
+			ensure_installed = { "lua_ls", "beancount", "rust_analyzer" },
 			handlers = {
+				-- Get LSP Zero to handle the Language Server configuration
 				lsp_zero.default_setup,
-				tsserver = function()
-					require("lspconfig").tsserver.setup({
-						single_file_support = false,
-						on_attach = function(client, bufnr)
-							print("hello tsserver")
-						end,
-					})
-				end,
-				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.lua_ls.setup({
+
+				-- Custom configuration for language servers go here
+
+				-- Lua Language Server custom config
+				lua_ls = function()
+					require("lspconfig").lua_ls.setup({
 						settings = {
 							Lua = {
+								workspace = { checkThirdParty = false },
+								telemetry = { enable = false },
 								diagnostics = {
 									globals = { "vim" }, -- Suppress global vim error
 								},
@@ -118,24 +110,25 @@ return {
 						},
 					})
 				end,
-				-- Ansible
-				["ansiblels"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.ansiblels.setup({
-						filetypes = { "yaml", "yml", "yaml.ansible" },
-					})
-				end,
-				-- -- Rust Analyzer
-				-- ["rust_analyzer"] = function ()
-				--     local lspconfig = require("lspconfig")
-				--     lspconfig.rust_analyzer.setup({
-				--
-				--     })
-				-- end
+
+				-- Beancount Language Server custom config
+                beancount = lsp_zero.noop -- Turning off for now see https://github.com/polarmutex/beancount-language-server/issues/222
+                -- beancount = function()
+				-- 	require("lspconfig").beancount.setup({
+				-- 		cmd = { "RUST_BACKTRACE=1 beancount-language-server" },
+				-- 		init_options = {
+				-- 			journal_file = "~/Worland/Workspaces/plain-text-ledger/main.beancount",
+				-- 		},
+				-- 	})
+				-- end,
+
+                -- Turn of Language Server with "lsp_zero.noop"
+                -- tsserver = lsp_zero.noop,
+
 			},
 		})
 
-		-- LSP Diagnostics Options Setup
+		-- -- LSP Diagnostics Options Setup
 		local sign = function(opts)
 			vim.fn.sign_define(opts.name, {
 				texthl = opts.name,
