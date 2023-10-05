@@ -27,6 +27,7 @@ return {
 				"bash",
 				"markdown",
 				"markdown_inline",
+                "beancount",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
