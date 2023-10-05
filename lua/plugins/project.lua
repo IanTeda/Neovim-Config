@@ -112,5 +112,7 @@ return {
 		}
 		require("project_nvim").setup(PLUGIN_SETTINGS)
 
+        -- Add key map to open Telescope project finder
+        vim.keymap.set('n', '<leader>sp', '<cmd>Telescope projects<cr>', { desc = '[S]earch [P]rojects' })
 	end,
 }
