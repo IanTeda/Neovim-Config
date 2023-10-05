@@ -4,7 +4,7 @@
 -- File: ~/.configs/nvim/init.lua
 -- ----------------------------------------------------------------------------
 
--- Disable Netrw for better Neotree intergration
+-- Disable Netrw for better Neotree integration
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
