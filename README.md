@@ -40,6 +40,6 @@ nvim --headless "+Lazy! sync" +qa
 
 #### References
 
-- [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvimhttps://github.com/nvim-lua/kickstart.nvim)
+- [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvimhttps://github.com/nvim-lua/kickstart.nvim)
 - [Neovim from Sratch - Github Repo](https://github.com/LunarVim/Neovim-from-scratch/tree/master)
 - [Neovim from Sratch - Youtub Series](https://www.youtube.com/watch?v=ctH-a-1eUME&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ)
