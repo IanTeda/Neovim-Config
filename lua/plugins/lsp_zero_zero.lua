@@ -89,8 +89,26 @@ return {
 		-- Set up set up Language servers
 		require("mason-lspconfig").setup({
 			-- Get Mason to install as minimum these language servers
-			ensure_installed = { "lua_ls", "beancount", "rust_analyzer" },
-			handlers = {
+            -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
+			ensure_installed = { 
+                "ansiblels",                -- Ansible
+                "beancount",                -- Beancount
+                "jsonls",                   -- JSON
+                "lua_ls",                   -- Lua
+                "rust_analyzer",            -- Rust
+                "marksman",                 -- Markdown
+                "intelephense",             -- PHP
+                "jedi_language_server",     -- Python
+                "sqlls",                    -- SQL
+                "golangci_lint_ls",         -- GO Lang
+                "html",                     -- html
+                "tsserver",                 -- Javascript & Typescript
+                "lemminx",                  -- XML
+                "yamlls",                   -- YAML
+            },
+
+            -- Link installed binaries to Neovim LSP
+            handlers = {
 				-- Get LSP Zero to handle the Language Server configuration
 				lsp_zero.default_setup,
 
@@ -112,19 +130,20 @@ return {
 				end,
 
 				-- Beancount Language Server custom config
-                beancount = lsp_zero.noop -- Turning off for now see https://github.com/polarmutex/beancount-language-server/issues/222
-                -- beancount = function()
-				-- 	require("lspconfig").beancount.setup({
-				-- 		cmd = { "RUST_BACKTRACE=1 beancount-language-server" },
-				-- 		init_options = {
-				-- 			journal_file = "~/Worland/Workspaces/plain-text-ledger/main.beancount",
-				-- 		},
-				-- 	})
-				-- end,
+				-- beancount = lsp_zero.noop -- Turning off for now see https://github.com/polarmutex/beancount-language-server/issues/222
+				beancount = function()
+					require("lspconfig").beancount.setup({
+						cmd = { "/home/ian/.local/share/nvim/mason/bin/beancount-language-server" },
+                        on_attach = on_attach,
+                        capabilities = capabilities,
+						init_options = {
+							journal_file = "/home/ian/Worland/Workspaces/plain-text-ledger/main.beancount",
+						},
+					})
+				end,
 
-                -- Turn of Language Server with "lsp_zero.noop"
-                -- tsserver = lsp_zero.noop,
-
+				-- Turn of Language Server with "lsp_zero.noop"
+				-- tsserver = lsp_zero.noop,
 			},
 		})
 
