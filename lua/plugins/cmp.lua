@@ -125,12 +125,12 @@ return {
 				{ name = "path" },
 				{ name = "crates" },
 				{ name = "nvim_lua" },
-                {
-                    name = 'beancount',
-                    option = {
-                        account = "~/Worland/Workspaces/plain-text-ledger/beans/accounts.beancount"
-                    }
-                }
+				{
+					name = "beancount",
+					option = {
+						account = "~/Worland/Workspaces/plain-text-ledger/beans/accounts.beancount",
+					},
+				},
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },

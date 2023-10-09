@@ -93,17 +93,18 @@ return {
 			ensure_installed = { 
                 "ansiblels",                -- Ansible
                 "beancount",                -- Beancount
-                "jsonls",                   -- JSON
-                "lua_ls",                   -- Lua
-                "rust_analyzer",            -- Rust
-                "marksman",                 -- Markdown
-                "intelephense",             -- PHP
-                "jedi_language_server",     -- Python
-                "sqlls",                    -- SQL
                 "golangci_lint_ls",         -- GO Lang
                 "html",                     -- html
-                "tsserver",                 -- Javascript & Typescript
+                "intelephense",             -- PHP
+                "jedi_language_server",     -- Python
+                "jsonls",                   -- JSON
                 "lemminx",                  -- XML
+                "lua_ls",                   -- Lua
+                "marksman",                 -- Markdown
+                "rust_analyzer",            -- Rust
+                "sqlls",                    -- SQL
+                "taplo",                    -- TOML
+                "tsserver",                 -- Javascript & Typescript
                 "yamlls",                   -- YAML
             },
 
