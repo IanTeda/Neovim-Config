@@ -35,7 +35,7 @@ return {
 			ignore_blank_line = false,
 
 			-- Whether to recognize as comment only lines without indent
-			start_of_line = false,
+			start_of_line = true,
 
 			-- Whether to ensure single space pad for comment parts
 			pad_comment_parts = true,

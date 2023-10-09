@@ -3,29 +3,36 @@
 -- Smart and Powerful commenting plugin
 --
 -- File: ~/.config/nvim/lua/plugins/comments.lua
--- Repo: https://github.com/numToStr/Comment.nvim/tree/master
+-- Repo: https://github.com/numToStr/Comment.nvim
 -- -----------------------------------------------------------------------------
 
 return {
     -- PLUGIN TO LAZY LOAD
     -- Lazy.vim will look for lua files in the ~/.config/nvim/lua/plugins folder
     'numToStr/Comment.nvim',
-    
+
     -- VERSIONING
-    -- If you want to install a specific revision of a plugin, you can use 
+    -- If you want to install a specific revision of a plugin, you can use
     -- `commit`,`tag`, `branch`, `version`.
-    version = "*",
-    
-    -- CONFIG 
-    -- Config is executed when the plugin loads. The default implementation 
+    -- version = "*",
+
+    dependencies = {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+    },
+
+    lazy = false,
+
+    -- CONFIG
+    -- Config is executed when the plugin loads. The default implementation
     -- will automatically run require(MAIN).setup(opts). Lazy uses several
-    -- heuristics to determine the plugin’s MAIN module automatically based 
-    -- on the plugin’s name. See also opts. To use the default implementation 
+    -- heuristics to determine the plugin’s MAIN module automatically based
+    -- on the plugin’s name. See also opts. To use the default implementation
     -- without opts set config to true.
-    config = function ()
-        --- Comment Settings
-        local COMMENT_SETTINGS = {
-            --Add a space b/w comment and the line
+    config = function()
+        -- Put plugin settings into a local variable for easier reading
+        local PLUGIN_SETTINGS = {
+            -- Add options here
+            ---Add a space b/w comment and the line
             padding = true,
             ---Whether the cursor should stay at its position
             sticky = true,
@@ -40,7 +47,7 @@ return {
             },
             ---LHS of operator-pending mappings in NORMAL and VISUAL mode
             opleader = {
-                ---Line-comment keymapG
+                ---Line-comment keymap
                 line = 'gc',
                 ---Block-comment keymap
                 block = 'gb',
@@ -63,27 +70,20 @@ return {
                 extra = true,
             },
             ---Function to call before (un)comment
-            pre_hook = function(ctx)
-                local U = require "Comment.utils"
-
-                -- Treesitter intergration
-                local location = nil
-                if ctx.ctype == U.ctype.block then
-                    location = require("ts_context_commentstring.utils").get_cursor_location()
-                elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-                    location = require("ts_context_commentstring.utils").get_visual_start_location()
-                end
-
-                return require("ts_context_commentstring.internal").calculate_commentstring {
-                    key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
-                    location = location,
-                }
-            end,
-
+            pre_hook = nil,
             ---Function to call after (un)comment
             post_hook = nil,
         }
+        require('Comment').setup(PLUGIN_SETTINGS)
 
-        require('Comment').setup(COMMENT_SETTINGS)
+        -- Configure custom comment strings
+        local ft = require('Comment.ft')
+        -- Configure comment string for Beancount files
+        ft.beancount = {
+            -- Line comment string
+            ';%s',
+            -- Block comment string
+            -- ';[[%s]]' -- There is no Beancount block comment string
+        }
     end,
 }
