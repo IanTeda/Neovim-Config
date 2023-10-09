@@ -42,6 +42,10 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts) -- <ctrl+right> = reso
 keymap("n", "<S-l>", ":bnext<CR>", opts) -- <shift+l> = switch buffer focus left
 keymap("n", "<S-h>", ":bprevious<CR>", opts) -- <shift+r> = switch buffer focus right
 
+-- Insert new empty line
+keymap("n", "<leader>o", "m`o<Esc>``", opts) -- Add line below 
+keymap("n", "<leader>O", "m`O<Esc>``", opts) -- Add line above
+
 -- [[ Insert Mode ]]
 -- ============================================================================
 
