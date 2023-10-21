@@ -1,4 +1,4 @@
--------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 -- LSP ZERO
 -- Collection of functions that will help you setup Neovim's LSP client, so you
 -- can get IDE-like features with minimum effort.
@@ -106,6 +106,7 @@ return {
                 "taplo",                    -- TOML
                 "tsserver",                 -- Javascript & Typescript
                 "yamlls",                   -- YAML
+                "codelldb"                  -- Debugger
             },
 
             -- Link installed binaries to Neovim LSP
@@ -114,6 +115,9 @@ return {
 				lsp_zero.default_setup,
 
 				-- Custom configuration for language servers go here
+                -- ansiblels = function ()
+                --    require("lspconfig").ansiblels.setup({})
+                -- end,
 
 				-- Lua Language Server custom config
 				lua_ls = function()

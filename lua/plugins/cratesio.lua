@@ -44,12 +44,12 @@ return {
 	-- Lazy load on filetype
 	-- ft = { "toml" },
 
-    -- Lazy load on event
-    event = { 
-        "BufRead Cargo.toml",
-    },
-	
-    -- PRIORITY
+	-- Lazy load on event
+	event = {
+		"BufRead Cargo.toml",
+	},
+
+	-- PRIORITY
 	-- Only useful for start plugins (lazy=false) to force loading certain
 	-- plugins first. Default priority is 50. It’s recommended to set this to
 	-- a high number for colorschemes.
@@ -71,7 +71,7 @@ return {
 	opts = {
 		src = {
 			cmp = {
-				enabled = true,         -- Add auto complete cmp
+				enabled = true, -- Add auto complete cmp
 			},
 		},
 	},
@@ -82,10 +82,7 @@ return {
 	-- heuristics to determine the plugin’s MAIN module automatically based
 	-- on the plugin’s name. See also opts. To use the default implementation
 	-- without opts set config to true.
-	--config = function ()
-	--    -- Put plugin settings into a local variable for easier reading
-	--    local PLUGIN_SETTINGS = {
-	--    }
-	--    require('plugin').setup(PLUGIN_SETTINGS)
-	--end,
+	config = function()
+
+	end,
 }

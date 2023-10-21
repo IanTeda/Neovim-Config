@@ -101,31 +101,34 @@ return {
 					end,
 				},
 
-				beancount = {
-					function()
-						return {
-							exe = vim.fn.stdpath("data") .. "/mason/bin/beancount-language-server",
-							args = {
-								util.escape_path(util.get_current_buffer_file_path()),
-							},
-							stdin = true,
-						}
-					end,
-				},
+				-- beancount = {
+				--
+				-- },
 				-- Use the special "*" filetype for defining formatter configurations on
 				-- any filetype
 				["*"] = {
 					-- "formatter.filetypes.any" defines default configurations for any
 					-- filetype
 					require("formatter.filetypes.any").remove_trailing_whitespace,
+                    -- Format with LSP if there are not other formatters
+                    -- https://github.com/mhartington/formatter.nvim/issues/192
+					function()
+						local formatters = require("formatter.util").get_available_formatters_for_ft(vim.bo.filetype)
+						local formatters_len = 0
+						for _ in pairs(formatters) do
+							formatters_len = formatters_len + 1
+						end
+						if formatters_len == 0 then
+							vim.lsp.buf.format()
+						end
+					end,
 				},
 			},
 		}
 
 		require("formatter").setup(PLUGIN_SETTINGS)
 
-
-        vim.keymap.set('n', '<leader>f', '<cmd>Format<cr>', { desc = 'Format document' })
-        vim.keymap.set('n', '<leader>F', '<cmd>FormatWrite<cr>', { desc = 'Format and write document' })
+		vim.keymap.set("n", "<leader>f", "<cmd>Format<cr>", { desc = "Format document" })
+		vim.keymap.set("n", "<leader>F", "<cmd>FormatWrite<cr>", { desc = "Format and write document" })
 	end,
 }

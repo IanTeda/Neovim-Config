@@ -27,7 +27,7 @@ return {
 				"bash",
 				"markdown",
 				"markdown_inline",
-                "beancount",
+				"beancount",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -128,5 +128,10 @@ return {
 
 		-- Setup treesitter
 		require("nvim-treesitter.configs").setup(TREESITTER_SETTINGS)
+
+		-- Treesitter folding
+		-- vim.wo.foldmethod = "expr"
+		-- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+		-- vim.wo.nofoldenable = "true"
 	end,
 }

@@ -119,12 +119,15 @@ return {
 				end, { "i", "s" }),
 			}),
 			sources = {
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
-				-- { name = "buffer" },
-				{ name = "path" },
-				{ name = "crates" },
-				{ name = "nvim_lua" },
+				{ name = "path" }, -- File path
+				{ name = "nvim_lsp", keyword_length = 3 }, -- Language server completion
+				{ name = "nvim_lsp_signature_help" }, -- display function signatures with current parameter emphasized
+				{ name = "nvim_lua", keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.
+				{ name = "buffer", keyword_length = 2 }, -- source current buffer
+				{ name = "vsnip", keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
+				{ name = "calc" }, -- Maths calculations
+				-- { name = "luasnip" },
+				{ name = "crates" }, -- Rust creates
 				{
 					name = "beancount",
 					option = {
