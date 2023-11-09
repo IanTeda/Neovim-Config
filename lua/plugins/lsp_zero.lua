@@ -142,7 +142,7 @@ return {
                         on_attach = on_attach,
                         capabilities = capabilities,
 						init_options = {
-							journal_file = "/home/ian/Worland/Workspaces/plain-text-ledger/main.beancount",
+							journal_file = "/home/ian/Projects/Ledger/main.beancount"
 						},
 					})
 				end,
