@@ -138,11 +138,11 @@ return {
 				-- beancount = lsp_zero.noop -- Turning off for now see https://github.com/polarmutex/beancount-language-server/issues/222
 				beancount = function()
 					require("lspconfig").beancount.setup({
-						cmd = { "/home/ian/.local/share/nvim/mason/bin/beancount-language-server" },
-                        on_attach = on_attach,
-                        capabilities = capabilities,
+						-- cmd = { "/home/ian/.local/share/nvim/mason/bin/beancount-language-server" },
+      --                   on_attach = on_attach,
+      --                   capabilities = capabilities,
 						init_options = {
-							journal_file = "/home/ian/Projects/Ledger/main.beancount"
+							journal_file = "/home/ian/Projects/Plain-Text-Ledger/main.beancount"
 						},
 					})
 				end,

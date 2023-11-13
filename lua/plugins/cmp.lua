@@ -128,12 +128,11 @@ return {
 				{ name = "calc" }, -- Maths calculations
 				-- { name = "luasnip" },
 				{ name = "crates" }, -- Rust creates
-				{
-					name = "beancount",
-					option = {
-						account = "~/Worland/Workspaces/plain-text-ledger/beans/accounts.beancount",
-					},
-				},
+				-- { name = "beancount",
+				-- 	option = {
+				-- 		account = "/home/ian/Projects/Plain-Text-Ledger/main.beancount",
+				-- 	},
+				-- },
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
