@@ -1,0 +1,5 @@
+# Compiled spell files (generated from *.add files)
+spell/*.add.spl
+
+# Local/machine-specific overrides
+.local/
