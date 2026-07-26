@@ -20,7 +20,7 @@ require("lazy").setup({
     lazy = false,
   },
   install = {
-    -- Fallback colorscheme while plugins install
+    -- Fallback color scheme while plugins install
     colorscheme = { "habamax" },
   },
   git = {

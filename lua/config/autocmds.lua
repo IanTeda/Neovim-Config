@@ -3,7 +3,7 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- Briefly highlight yanked text
+-- Briefly highlight yanked text so it's clear what was copied
 autocmd("TextYankPost", {
   group = augroup("highlight_yank", { clear = true }),
   callback = function()
@@ -11,7 +11,7 @@ autocmd("TextYankPost", {
   end,
 })
 
--- Close certain utility buffers with just `q`
+-- Close certain utility buffers with just `q` instead of `:q<CR>`
 autocmd("FileType", {
   group = augroup("close_with_q", { clear = true }),
   pattern = { "help", "lspinfo", "man", "qf", "checkhealth" },

@@ -23,6 +23,13 @@ map("n", "<C-Right>", ":vertical resize +2<CR>",  opts)
 -- Navigate buffers
 map("n", "<S-l>", ":bnext<CR>",     opts)
 map("n", "<S-h>", ":bprevious<CR>", opts)
+map("n", "<leader>bd", ":bdelete<CR>", opts)
+
+-- Clear search highlight
+map("n", "<Esc>", ":nohlsearch<CR>", opts)
+
+-- Open file explorer
+map("n", "<leader>e", ":Oil<CR>", opts)
 
 -- Insert blank lines without entering insert mode
 map("n", "<leader>o", "m`o<Esc>``", opts)

@@ -1,8 +1,10 @@
--- Disable netrw early so neo-tree can take over file browsing
+-- Neovim configuration entry point. Loaded first on startup.
+
+-- Must be disabled before any plugin loads so neo-tree can own file browsing.
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Leader must be set before lazy.nvim loads plugins
+-- Must be set before lazy.nvim loads so plugins see the correct leader.
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
