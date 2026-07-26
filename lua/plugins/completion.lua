@@ -23,8 +23,8 @@ return {
         },
       },
       fuzzy = {
-        use_frecency     = true,
-        use_proximity    = true,
+        frecency  = { enabled = true },
+        proximity = { enabled = true },
       },
     },
   },
