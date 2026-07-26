@@ -3,3 +3,6 @@ spell/*.add.spl
 
 # Local/machine-specific overrides
 .local/
+
+# Shell environment overrides
+.direnv/
