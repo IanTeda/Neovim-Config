@@ -1,52 +1,57 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
-    event = "BufReadPost",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "nix", "lua", "bash", "vim", "vimdoc", "markdown",
-          "beancount", "rust", "toml", "json", "yaml",
-          "python", "typescript", "html",
-        },
-        auto_install = false,
-        highlight = { enable = true },
-        indent    = { enable = true },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection   = "<C-space>",
-            node_incremental = "<C-space>",
-            node_decremental = "<bs>",
-          },
-        },
-        textobjects = {
-          select = {
-            enable    = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
-              ["aa"] = "@parameter.outer",
-              ["ia"] = "@parameter.inner",
-            },
-          },
-          move = {
-            enable              = true,
-            set_jumps           = true,
-            goto_next_start     = { ["]m"] = "@function.outer", ["]]"] = "@class.outer" },
-            goto_next_end       = { ["]M"] = "@function.outer", ["]["] = "@class.outer" },
-            goto_previous_start = { ["[m"] = "@function.outer", ["[["] = "@class.outer" },
-            goto_previous_end   = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" },
-          },
-        },
+      require("nvim-treesitter").install({
+        "nix", "lua", "bash", "vim", "vimdoc", "markdown",
+        "beancount", "rust", "toml", "json", "yaml",
+        "python", "typescript", "html",
       })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          vim.treesitter.start()
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+
+      require("nvim-treesitter-textobjects").setup({
+        select = { lookahead = true },
+        move  = { set_jumps = true },
+      })
+
+      local select = require("nvim-treesitter-textobjects.select")
+      for key, query in pairs({
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        ["aa"] = "@parameter.outer",
+        ["ia"] = "@parameter.inner",
+      }) do
+        vim.keymap.set({ "x", "o" }, key, function()
+          select.select_textobject(query, "textobjects")
+        end)
+      end
+
+      local move = require("nvim-treesitter-textobjects.move")
+      for method, mappings in pairs({
+        goto_next_start     = { ["]m"] = "@function.outer", ["]]"] = "@class.outer" },
+        goto_next_end       = { ["]M"] = "@function.outer", ["]["] = "@class.outer" },
+        goto_previous_start = { ["[m"] = "@function.outer", ["[["] = "@class.outer" },
+        goto_previous_end   = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" },
+      }) do
+        for key, query in pairs(mappings) do
+          vim.keymap.set("n", key, function()
+            move[method](query, "textobjects")
+          end)
+        end
+      end
     end,
   },
 }

@@ -15,7 +15,7 @@ return {
       show_hidden = false,
     },
     keymaps = {
-      ["<C-s>"] = "actions.save",
+      ["<C-s>"] = { callback = function() vim.cmd("w") end, desc = "Save changes" },
       ["<C-h>"] = "actions.toggle_hidden",
       ["g?"]    = "actions.show_help",
     },
